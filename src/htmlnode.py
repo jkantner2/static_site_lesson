@@ -1,3 +1,6 @@
+prop_dict_test = {"A": "B", "C": "D"}
+type_test = "<a>"
+
 class HTMLNode():
     def __init__(self, tag = None, value = None, children = None, props = None):
         #String representing the HTML tag name (eg. "p", "a", "h1", etc.)
@@ -13,8 +16,12 @@ class HTMLNode():
         raise NotImplementedError
 
     def props_to_html(self):
-        for key, value in self.props:
-            return " " + key + "=" + '"' + value + '"'
+        if self.props is None:
+            return ""
+        props_html = ""
+        for prop in self.props:
+            props_html += f' {prop}="{self.props[prop]}"'
+        return props_html
 
     def __repr__(self):
-        return f"{self.tag}, {self.value}, {self.children}, {self.props},"
+        return f"HTMLNode({self.tag}, {self.value}, {self.children}, {self.props})"
