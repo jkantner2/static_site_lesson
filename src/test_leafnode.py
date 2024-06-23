@@ -10,16 +10,16 @@ from htmlnode import (
 
 class TestLeafNode(unittest.TestCase):
     def test_no_value(self):
-        node = LeafNode("a", None, None, None)
+        node = LeafNode("a", None, None)
         with self.assertRaises(ValueError):
             node.to_html()
 
     def test_value_no_tag(self):
-        node = LeafNode(None, "this is a test", None, None) 
+        node = LeafNode(None, "this is a test", None) 
         self.assertEqual(node.to_html(), "this is a test")
 
     def test_child(self):
-        node = LeafNode("a", "this is a test", ["entry", "entry2"], {"a":"b"})
+        node = LeafNode("a", "this is a test", {"a":"b"})
         self.assertEqual('<a a="b">this is a test</a>', node.to_html())
 
 if __name__ == "__main__":

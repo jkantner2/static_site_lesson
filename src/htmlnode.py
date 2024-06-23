@@ -3,7 +3,7 @@ type_test = "<a>"
 value_test = "this is a test"
 
 class HTMLNode():
-    def __init__(self, tag = None, value = None, children = None, props = None):
+    def __init__(self, tag = None, value = None, children = None, props = None): 
         #String representing the HTML tag name (eg. "p", "a", "h1", etc.)
         self.tag = tag
         #String representing the value of the HTML tag (eg. the text inside a paragraph)
@@ -28,8 +28,8 @@ class HTMLNode():
         return f"HTMLNode({self.tag}, {self.value}, {self.children}, {self.props})"
 
 class LeafNode(HTMLNode):
-    def __init__(self, tag, value, children, props=None):
-        super().__init__(tag, value, children, props)
+    def __init__(self, tag, value, props=None):
+        super().__init__(tag, value, None, props)
 
     def to_html(self): 
         if self.value == None:
