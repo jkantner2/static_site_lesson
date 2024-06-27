@@ -10,6 +10,10 @@ from textnode import (
     text_type_image
 )
 
+from htmlnode import(
+    LeafNode
+)
+
 class TestTextNode(unittest.TestCase):
     def test_eq(self):
         node = TextNode("This is a text node", "bold")
@@ -37,6 +41,25 @@ class TestTextNode(unittest.TestCase):
             "TextNode(This is a text node, text, https://www.boot.dev)", repr(node)
         )
 
+    def test_convert_to_html_text(self):
+        node = TextNode("I am some funny text", "text", None)
+        self.assertTrue(node.text_node_to_html_node().__eq__(LeafNode(None, "I am some funny text", None)))
 
+    def test_convert_to_html_bold(self):
+        node = TextNode("This is a text node", "bold", None)
+        self.assertTrue(node.text_node_to_html_node().__eq__(LeafNode("b", "This is a text node", None)))
+
+    def test_convert_to_html_italic(self):
+        node = TextNode("This is a text node", "italic", None)
+        self.assertTrue(node.text_node_to_html_node().__eq__(LeafNode("i", "This is a text node", None)))
+
+    def test_convert_to_html_code(self):
+        node = TextNode("code text", "code", None)
+        self.assertTrue(node.text_node_to_html_node().__eq__(LeafNode("code", "code text", None)))
+
+    def test_convert_to_html_link(self):
+        node = TextNode("some text", "link", "www.boot.dev")
+        self.assertTrue(node.text_node_to_html_node().__eq__(LeafNode("a", "some text", {"href": "www.boot.dev"})))
+        
 if __name__ == "__main__":
     unittest.main()
