@@ -50,4 +50,57 @@ class TextNode():
             return LeafNode("a", text_node.text, {"href": text_node.url})
 
         if text_node.text_type == "image":
-            return LeafNode("img", "", {"src":text_node.url, "alt": text_node.text})
+            return LeafNode("img", "", {"src": text_node.url, "alt": text_node.text})
+    
+    """@staticmethod
+    def split_nodes_delimiter(old_nodes, delimiter, text_type):
+        new_nodes = []
+        for node in old_nodes: 
+            if node.text_type != text_type_text:
+                new_nodes.append(node)
+                continue
+
+            split_node = node.text.split(delimiter)
+
+            if len(split_node) % 2 == 0:
+                raise Exception("Invalid markdown syntax")
+
+            x = node.text.split(delimiter)
+            i = 0
+            if delimiter == "`":
+                while i <= len(x) - 1:
+                    if i % 2 == 0:
+                        new_nodes.append(TextNode(x[i], text_type_text, None))
+                        i += 1
+                    else:
+                        new_nodes.append(TextNode(x[i], text_type_code, None))
+                        i += 1
+
+            if delimiter == "**":
+                while i <= len(x) - 1:
+                    if i % 2 == 0:
+                        new_nodes.append(TextNode(x[i], text_type_text, None))
+                        i += 1
+                    else:
+                        new_nodes.append(TextNode(x[i], text_type_bold, None))
+                        i += 1
+
+            if delimiter == "*":
+                while i <= len(x) - 1:
+                    if i % 2 == 0:
+                        new_nodes.append(TextNode(x[i], text_type_text, None))
+                        i += 1
+                    else:
+                        new_nodes.append(TextNode(x[i], text_type_italic, None))
+                        i += 1
+        print(f"DD {new_nodes}")
+        return new_nodes
+
+#  
+test_nodes = [
+        TextNode("Big chungus `code hehe` nerd", text_type_text),
+        TextNode("Some *italic* text", text_type_italic),
+        TextNode("Some **bold** text", text_type_bold)
+        ]
+
+missing_closing_delimiter = TextNode("This is **a test", text_type_text)"""
