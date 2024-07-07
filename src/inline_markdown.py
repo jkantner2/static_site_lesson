@@ -41,13 +41,12 @@ def extract_markdown_links(text):
 
 def split_nodes_image(old_nodes):
     new_nodes = []
-    nodes_back_to_old = []
     for old_node in old_nodes:
         image_tups = extract_markdown_images(old_node.text)
         text_list = []
         text = old_node.text
         if image_tups == []:
-            nodes_back_to_old.append(old_node)
+            new_nodes.append(old_node)
             continue
         for i in range(len(image_tups)):
             sections = text.split(f"![{image_tups[i][0]}]({image_tups[i][1]})", 1)
@@ -64,19 +63,17 @@ def split_nodes_image(old_nodes):
             if i == 0 or i <= len(image_tups) - 1:
                 new_nodes.append(TextNode(image_tups[i][0], text_type_image, image_tups[i][1]))
     
-    old_nodes = nodes_back_to_old
     return new_nodes
 
 
 def split_nodes_link(old_nodes):
     new_nodes = []
-    nodes_back_to_old = []
     for old_node in old_nodes:
         link_tups = extract_markdown_links(old_node.text)
         text_list = []
         text = old_node.text
         if link_tups == []:
-            nodes_back_to_old.append(old_node)
+            new_nodes.append(old_node)
             continue
         for i in range(len(link_tups)):
             sections = text.split(f"[{link_tups[i][0]}]({link_tups[i][1]})", 1)
@@ -93,5 +90,14 @@ def split_nodes_link(old_nodes):
             if i == 0 or i <= len(link_tups) - 1:
                 new_nodes.append(TextNode(link_tups[i][0], text_type_link, link_tups[i][1]))
     
-    old_nodes = nodes_back_to_old
     return new_nodes
+
+def text_to_textnodes(text):
+    node = TextNode(text, text_type_text)
+    tmp = None
+    tmp = split_nodes_delimiter([node], "**", text_type_bold)
+    tmp = split_nodes_delimiter(tmp, "*", text_type_italic)
+    tmp = split_nodes_delimiter(tmp, "`", text_type_code)
+    tmp = split_nodes_image(tmp)
+    tmp = split_nodes_link(tmp) 
+    return tmp
