@@ -92,9 +92,7 @@ def split_nodes_link(old_nodes):
     
     return new_nodes
 
-<<<<<<< HEAD
 
-=======
 def text_to_textnodes(text):
     node = TextNode(text, text_type_text)
     tmp = None
@@ -104,4 +102,4 @@ def text_to_textnodes(text):
     tmp = split_nodes_image(tmp)
     tmp = split_nodes_link(tmp) 
     return tmp
->>>>>>> text_to_textnodes
+
