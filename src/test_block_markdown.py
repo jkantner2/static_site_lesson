@@ -2,6 +2,13 @@ import unittest
 
 from block_markdown import(
     markdown_to_blocks,
+    block_to_block_type,
+    block_type_code,
+    block_type_quote,
+    block_type_heading,
+    block_type_paragraph,
+    block_type_ordered_list,
+    block_type_unordered_list,
 )
 
 class TestBlockMarkdown(unittest.TestCase):
@@ -52,6 +59,58 @@ This is the same paragraph on a new line
                 "* This is a list\n* with items",
             ],
         )
+
+# Tests for block_to_block_type
+
+    def test_heading_block(self):
+        block = "## this is a heading"
+        assignment = block_to_block_type(block)
+        self.assertEqual(block_type_heading, assignment)
+
+    def test_invalid_heading_block(self):
+        block = "##3 this is a heading"
+        assignment = block_to_block_type(block)
+        self.assertNotEqual(block_type_heading, assignment)
+
+    def test_code_block(self):
+        block = "``` this is code ```"
+        assignment = block_to_block_type(block)
+        self.assertEqual(block_type_code, assignment)
+
+    def test_invalid_code_block(self):
+        block = "`` this is code ```"
+        assignment = block_to_block_type(block)
+        self.assertNotEqual(block_type_code, assignment)
+
+    def test_quote_block(self):
+        block = "> this is a quote"
+        assignment = block_to_block_type(block)
+        self.assertEqual(block_type_quote, assignment)
+
+    def test_invalid_quote_block(self):
+        block = "''' this is quote '''"
+        assignment = block_to_block_type(block)
+        self.assertNotEqual(block_type_quote, assignment)
+
+    def test_unordered_list_block(self):
+        block = "* this is a unordered list"
+        assignment = block_to_block_type(block)
+        self.assertEqual(block_type_unordered_list, assignment)
+
+    def test_invalid_unordered_list_block(self):
+        block = "*this is invalid"
+        assignment = block_to_block_type(block)
+        self.assertNotEqual(block_type_unordered_list, assignment)
+
+    def test_ordered_list_block(self):
+        block = "1. this is a unordered list"
+        assignment = block_to_block_type(block)
+        self.assertEqual(block_type_ordered_list, assignment)
+
+    def test_invalid_ordered_list_block(self):
+        block = "1.this is invalid"
+        assignment = block_to_block_type(block)
+        self.assertNotEqual(block_type_ordered_list, assignment)
 
 if __name__ == '__main':
     unittest.main()
