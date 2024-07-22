@@ -1,14 +1,14 @@
 import unittest
 
-from block_markdown import(
+from block_markdown import (
     markdown_to_blocks,
     block_to_block_type,
     block_type_code,
     block_type_quote,
     block_type_heading,
     block_type_paragraph,
-    block_type_ordered_list,
-    block_type_unordered_list,
+    block_type_olist,
+    block_type_ulist,
 )
 
 class TestBlockMarkdown(unittest.TestCase):
@@ -95,22 +95,22 @@ This is the same paragraph on a new line
     def test_unordered_list_block(self):
         block = "* this is a unordered list"
         assignment = block_to_block_type(block)
-        self.assertEqual(block_type_unordered_list, assignment)
+        self.assertEqual(block_type_ulist, assignment)
 
     def test_invalid_unordered_list_block(self):
         block = "*this is invalid"
         assignment = block_to_block_type(block)
-        self.assertNotEqual(block_type_unordered_list, assignment)
+        self.assertNotEqual(block_type_ulist, assignment)
 
     def test_ordered_list_block(self):
         block = "1. this is a unordered list"
         assignment = block_to_block_type(block)
-        self.assertEqual(block_type_ordered_list, assignment)
+        self.assertEqual(block_type_olist, assignment)
 
     def test_invalid_ordered_list_block(self):
         block = "1.this is invalid"
         assignment = block_to_block_type(block)
-        self.assertNotEqual(block_type_ordered_list, assignment)
+        self.assertNotEqual(block_type_olist, assignment)
 
 if __name__ == '__main':
     unittest.main()
