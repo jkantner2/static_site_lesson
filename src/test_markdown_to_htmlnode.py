@@ -1,11 +1,10 @@
 import unittest
 from markdown_to_htmlnode import *
 
-
 class TestMarkdownToHtmlnode(unittest.TestCase):
     def test_markdown_to_htmlnode(self):
         text = """
-This is a paragraph 
+This is a paragraph
 """
 #```This is code```
 
@@ -21,10 +20,10 @@ This is a paragraph
 
         nodes = markdown_to_htmlnode(text)
         self.assertEqual(
-            HTMLNode("div", None,
-            [
-                HTMLNode("p", None, [
-                    LeafNode(None, "This is a paragraph "),
+            ParentNode("div",
+                [
+                    ParentNode("p", [
+                        LeafNode(None, "This is a paragraph"),
 #                    LeafNode("b", "bold"),
 #                    LeafNode(None, " text")
                     ]),
@@ -45,10 +44,11 @@ This is a paragraph
 #                HTMLNode("h3", None, [
 #                    LeafNode(None, "This is a heading")
 #                    ])
-            ], None
-            ),
-            nodes
-            )
+                ], 
+                None
+                ),
+                nodes
+                )
 
 
 

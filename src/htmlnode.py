@@ -73,3 +73,14 @@ class ParentNode(HTMLNode):
 
     def __repr__(self):
         return f"ParentNode({self.tag}, {self.children}, {self.props})"
+
+    def __eq__(self, other):
+        if not isinstance(other, ParentNode):
+            return NotImplemented
+
+        return (
+            self.tag == other.tag
+            and self.value == other.value
+            and self.children == other.children
+            and self.props == other.props
+        )
