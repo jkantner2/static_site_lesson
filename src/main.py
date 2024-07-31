@@ -1,9 +1,10 @@
-from textnode import TextNode
+from copy_static import copy_static
+
 
 def main():
 
-    test = TextNode("a", "b", "c")
-    print(test)
+    copy_static("/Users/james/bootdevLessons/static_site_lesson/static")
+
 
 if __name__ == "__main__":
     main()
