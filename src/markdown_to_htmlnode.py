@@ -26,7 +26,7 @@ def block_to_htmlnode(block):
     if block_type == block_type_paragraph:
         return block_to_paragraph(block)
     if block_type == block_type_heading:
-        return block_type_heading(block)
+        return block_to_heading(block)
     if block_type == block_type_quote:
         return block_to_quote(block)
     if block_type == block_type_code:
