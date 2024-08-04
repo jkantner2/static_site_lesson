@@ -21,6 +21,6 @@ def generate_page(from_path, template_path, dest_path):
 
     req_dirs = os.path.dirname(dest_path)
     if not os.path.exists(req_dirs):
-        os.mkdirs(req_dirs)
+        os.mkdir(req_dirs)
     with open(dest_path, "x") as f:
         f.write(template_path_read_data)
